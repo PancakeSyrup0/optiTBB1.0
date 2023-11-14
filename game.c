@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <windows.h>
 
 
 void room1();
@@ -127,6 +128,12 @@ int calcXP(int xp,int lvlgain){
     }
     return lvlgain;
 }
+int lvlCALC(int dur)
+{
+    int xpgain;
+    xpgain = dur*10;
+    return calcXP(xpgain,0);
+}
 
 
 
@@ -156,6 +163,8 @@ void initPlayerInfo()
     printf("What race are you?\n");
     printf("(1)Human\n");
     initPlayerClass();
+    player.lvl=5;
+    player.hp=player.lvl*10;
 
     if((strcmp(player.race,"Human")==0)){
         player.MOVELIST[0]=0;player.MOVELIST[1]=1;player.MOVELIST[2]=0;player.MOVELIST[3]=0;
@@ -165,7 +174,7 @@ void initPlayerInfo()
     printf("%s is your name and you are a %s\n Accept?\n(1)Yes (2)No",player.name,player.race);
     scanf("%d",&choice);
     if(choice==1){
-        room1();
+        //hi
     }else if(choice==2){
         initPlayerInfo();
     }
@@ -249,10 +258,23 @@ int main()
     printf("You find yourself lost in a dark cave with no sense of your surroundings\n");
     initPlayerInfo();
     initMobInfo();
+    room1();
     return 0;
 }
 void room1(){
-    printf("End of testing");
-    exit(1);
+
+    B_DATA b_data;
+    printf("you encounter a slime\n");
+    printf("Starting battle with slime!\n\n");
+    b_data=Battle(player,mob[0]);
+    if(b_data.battle_result==1){
+        player.lvl+=lvlCALC(b_data.battle_duration);
+        printf("%s leveled up to LVL%d",player.name,player.lvl);
+    }else if(b_data.battle_result==0){
+        printf("You died!\n");
+        Sleep(5);
+        exit(1);
+    }
+    
 }
 

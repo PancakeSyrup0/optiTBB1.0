@@ -3,6 +3,8 @@
 #include <math.h>
 #include <string.h>
 
+
+void room1();
 //-----------structs--------------
 //testing commits
 //testing second commit
@@ -17,6 +19,7 @@ typedef struct ENTITY_INFO{
     char name[20];
     int lvl,hp;
     int MOVELIST[4];
+    char race[20];
 }ENTITY;
  
 
@@ -116,13 +119,43 @@ M_DATA REF_MOVELIST(int MOVE_ID)
 
 
 //---------MAIN GAME------------
+void initPlayerClass()
+{
+    int c;
+    scanf("%d",&c);
+    switch(c){
+        case 1: {
+            strcpy(player.race,"Human");
+            break;
+        }
+        default:{
+            printf("invalid choice\n");
+            initPlayerClass();
+        }
+    }
 
+}
 void initPlayerInfo()
 {
-    printf("Enter your name\n");
+    int choice;
+    printf("Enter your name.\n");
     scanf("%[^\n]%*c", player.name);
-    player.MOVELIST[0]=0;player.MOVELIST[1]=1;player.MOVELIST[2]=2;player.MOVELIST[3]=3;
-    player.hp=100;
+    printf("What race are you?\n");
+    printf("(1)Human\n");
+    initPlayerClass();
+
+    if((strcmp(player.race,"Human")==0)){
+        player.MOVELIST[0]=0;player.MOVELIST[1]=1;player.MOVELIST[2]=0;player.MOVELIST[3]=0;
+    }
+
+
+    printf("%s is your name and you are a %s\n Accept?\n(1)Yes (2)No",player.name,player.race);
+    scanf("%d",&choice);
+    if(choice==1){
+        room1();
+    }else if(choice==2){
+        initPlayerInfo();
+    }
 }
 void initMobInfo()
 {
@@ -200,15 +233,13 @@ B_DATA Battle(ENTITY p, ENTITY e)
 }
 int main()
 {
+    printf("You find yourself lost in a dark cave with no sense of your surroundings\n");
     initPlayerInfo();
     initMobInfo();
-    B_DATA bdat;
-    bdat = Battle(player,mob[0]);
-    if(bdat.battle_result==1){
-        printf("\nPlayer wins!\n");
-    }else if(bdat.battle_result==0){
-        printf("\nPlayer lost!\n");
-    }
     return 0;
+}
+void room1(){
+    printf("End of testing");
+    exit(1);
 }
 

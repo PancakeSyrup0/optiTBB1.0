@@ -114,6 +114,19 @@ M_DATA REF_MOVELIST(int MOVE_ID)
 
 }
 
+//XP CALCULATOR
+int balance=0;
+int calcXP(int xp,int lvlgain){
+    if(xp>=100){
+        balance=xp-100;
+        lvlgain++;
+
+        if(balance>=100){
+            calcXP(balance,lvlgain);
+        }
+    }
+    return lvlgain;
+}
 
 
 

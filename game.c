@@ -4,7 +4,7 @@
 #include <string.h>
 
 //-----------structs--------------
-
+//testing commits
 typedef struct MOVE_DATA{
     int dmg;
     int status;

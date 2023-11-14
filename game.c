@@ -5,6 +5,7 @@
 
 //-----------structs--------------
 //testing commits
+//testing second commit
 typedef struct MOVE_DATA{
     int dmg;
     int status;

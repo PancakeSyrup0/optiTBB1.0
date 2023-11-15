@@ -1,6 +1,6 @@
 //-----------structs--------------
-//testing commits
-//testing second commit
+#ifndef STRUCT_H
+#define STRUCT_H
 typedef struct MOVE_DATA{
     int dmg;
     int status;
@@ -20,3 +20,4 @@ typedef struct BATTLE_DATA{
     int battle_duration;
     int battle_result;
 }B_DATA;
+#endif
